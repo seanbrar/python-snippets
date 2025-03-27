@@ -97,7 +97,7 @@ python music_reorganizer.py /path/to/your/music/library --dry-run
 
 ### Rename Music Files
 
-**Description:** Batch renames music files by adding a specified prefix.
+**Description:** Batch renames music files according to the convention "disc - track. title". Automatically detects and preserves track numbers from existing filenames. Supports multiple naming patterns and only processes recognized audio formats (.mp3, .flac, .m4a, .opus, .ogg, .wav).
 
 **Usage:**
 
@@ -107,14 +107,30 @@ python rename_music_files.py [OPTIONS] PATH
 
 **Options:**
 
-- `--prefix PREFIX` : Prefix to add to each filename. Default is `1 - `.
+- `--prefix PREFIX` : Disc number to use in filename (e.g., "1" for "1 - 01. Title"). Default is "1".
 - `--dry-run` : Simulate the actions without renaming files.
+- `--auto-clean` : Automatically clean filenames by removing special characters and normalizing spacing.
 
-**Example:**
+**Examples:**
 
 ```bash
-python rename_music_files.py /path/to/your/music/files --prefix "01 - "
+# Rename files with disc 1 prefix
+python rename_music_files.py "/path/to/music/files" --prefix "1" --dry-run
+# Input:  "01 Track Name.flac"
+# Output: "1 - 01. Track Name.flac"
+
+# Preview changes with automatic filename cleaning
+python rename_music_files.py "/path/to/music/files" --prefix "2" --dry-run --auto-clean
+# Input:  "01. Track Name?.flac"
+# Output: "2 - 01. Track Name.flac"
 ```
+
+**Supported Filename Patterns:**
+- "01 - Title"
+- "01. Title"
+- "01 Title"
+
+The script will extract the track number and title from these patterns and reformat them according to the standard convention.
 
 ## Contributing
 
