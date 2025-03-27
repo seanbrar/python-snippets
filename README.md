@@ -1,10 +1,10 @@
 # Python Snippets
 
-[![GitHub License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A collection of standalone Python utility scripts for file management, media organization, and system tasks.
+A collection of Python utility scripts and tools for various tasks.
 
 ## Table of Contents
 
