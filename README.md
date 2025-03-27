@@ -76,27 +76,46 @@ These scripts modify file structures and metadata. Always back up your music lib
      - `-f`, `--files`: Include files in the tree (default: directories only)
    - Example: `python ascii_tree.py /home/user/documents -d 3 -f`
 
-### ISO Tools
+### ROM Tools
 
-1. `iso_read.py`: Reads and analyzes the header of an ISO file.
-   - Extracts information about unencrypted regions.
-   - Displays a hex dump of the ISO header.
-   - Usage: `python iso_read.py <path_to_iso_file>`
-   - No additional dependencies required.
-   - Example: `python iso_read.py /path/to/your/file.iso`
-
-### Game ROM Tools
+Located in the `rom_tools` folder, these scripts help manage ROM file collections:
 
 1. `nes_renamer.py`: Renames NES ROM files based on a provided DAT file.
+   - Standardizes ROM names according to common databases
+   - Handles different region formats (USA, Europe, Japan)
    - Usage: `python nes_renamer.py <input_directory> <dat_file_path>`
-   - Requires no additional dependencies.
-   - Example: `python nes_renamer.py /path/to/nes/roms /path/to/nes.dat`
-   - Features:
-     - Parses DAT files to extract standardized game names
-     - Renames NES ROM files to match standardized names
-     - Handles different region formats (USA, Europe, Japan)
-     - Prevents overwriting existing files
-     - Provides detailed logging of the renaming process
+
+2. `rom_copy.py`: Manages ROM file organization and verification.
+   - Copies and organizes ROM files based on predefined rules
+   - Verifies file integrity during operations
+   - Usage: `python rom_copy.py [OPTIONS] SOURCE_DIR DEST_DIR`
+
+### Disc Image Tools
+
+Located in the `disc_tools` folder, these scripts handle disc image management and conversion:
+
+1. `iso_extraction.py`: Extracts ISO files from 7z archives.
+   - Handles single and multi-file archives
+   - Creates organized output structure
+   - Usage: `python iso_extraction.py <folder_path>`
+
+2. `iso_cleanup.py`: Manages ISO files after CHD conversion.
+   - Removes ISO files that have corresponding CHD versions
+   - Includes dry-run mode for safety
+   - Usage: `python iso_cleanup.py <folder_path> [--execute]`
+
+3. `iso_read.py`: Analyzes ISO file headers and structure.
+   - Extracts header information
+   - Displays hex dumps of critical sections
+   - Usage: `python iso_read.py <path_to_iso_file>`
+
+4. `chd_creator.py`: Converts ISO files to CHD format.
+   - Batch processes multiple files
+   - Utilizes multi-core processing
+   - Provides detailed conversion logging
+   - Usage: `python chd_creator.py <folder_path>`
+
+All disc tools support graceful interruption and provide detailed logging of operations. The CHD conversion tools require the MAME `chdman` utility to be installed and accessible in the system path.
 
 ## Contributing
 
