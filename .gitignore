@@ -1,3 +1,5 @@
 .venv
 *.json
 *.txt
+*_conversion_*.log
+*_cleanup_*.log
