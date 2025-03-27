@@ -1,5 +1,8 @@
 # Python Music Library Tools
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](../LICENSE)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
+
 ## Overview
 
 Python Music Library Tools is a collection of scripts designed to help organize and manage your music library efficiently. These tools perform tasks such as auditing and correcting metadata, reorganizing music files based on metadata, and batch renaming of music files. 
