@@ -1,121 +1,117 @@
 # Python Snippets
 
-This repository contains a collection of disconnected Python scripts for various purposes. Each script is standalone and can be run independently.
+[![GitHub License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-## Getting Started
+A collection of standalone Python utility scripts for file management, media organization, and system tasks.
 
-### Prerequisites
+## Table of Contents
 
-- Python 3.x
+- [Background](#background)
+- [Install](#install)
+- [Usage](#usage)
+- [Categories](#categories)
+  - [Music Library Tools](#music-library-tools)
+  - [File System Tools](#file-system-tools)
+  - [ROM Tools](#rom-tools)
+  - [Disc Image Tools](#disc-image-tools)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Dependencies
+## Background
 
-Some scripts require additional Python libraries. These are listed in the `requirements.txt` file in the `music_library_tools` folder.
+This repository contains various Python scripts I've developed for personal use to automate common tasks. Each script is designed to be standalone and focused on a specific utility function. While originally created for personal use, these scripts have been refined to be more accessible and useful for others.
 
-Install the dependencies using:
+The scripts are organized into thematic categories, with more detailed documentation available in the subdirectory READMEs.
 
-```bash
-cd music_library_tools
-pip install -r requirements.txt
-```
-
-Most scripts require no additional dependencies. Exceptions are noted in the script descriptions.
-
-### Usage
+## Install
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/seanbrar/python-snippets.git
    ```
 
 2. Navigate to the project directory:
-   ```
+   ```bash
    cd python-snippets
    ```
 
-3. Run any script using Python:
-   ```
-   python script_name.py
+3. Install category-specific dependencies as needed:
+   ```bash
+   # For music library tools
+   cd music_library_tools
+   pip install -r requirements.txt
    ```
 
-## Script Categories
+Most scripts require no additional dependencies beyond Python 3.x. Specific requirements are noted in each category section below.
+
+## Usage
+
+Each script can be run independently using Python:
+
+```bash
+python script_name.py [OPTIONS] [ARGUMENTS]
+```
+
+For detailed usage instructions, refer to the category-specific sections below or the README files in each subdirectory.
+
+## Categories
 
 ### Music Library Tools
 
-Located in the `music_library_tools` folder, these scripts help organize and manage a music library:
+Located in the `music_library_tools` folder, these scripts help organize and manage a music library.
 
-1. `music_reorganizer.py`: Reorganizes music files based on metadata.
-   - Cleans album names and sanitizes filenames
-   - Moves files to structured directories based on metadata
-   - Usage: `python music_reorganizer.py [OPTIONS] LIBRARY_PATH`
+**Key Scripts:**
+- `metadata_audit.py`: Audits and corrects metadata for music files
+- `music_reorganizer.py`: Reorganizes music files based on metadata
+- `rename_music_files.py`: Batch renames music files in a specified directory
 
-2. `rename_music_files.py`: Batch renames music files in a specified directory.
-   - Adds a customizable prefix to filenames
-   - Provides a dry-run option for previewing changes
-   - Usage: `python rename_music_files.py [OPTIONS] PATH`
+**Dependencies:**
+- See `music_library_tools/requirements.txt`
 
-3. `metadata_audit.py`: Audits and corrects metadata for music files.
-   - Checks for missing or inconsistent album-wide metadata
-   - Allows batch updating of metadata across an entire album
-   - Supports custom album artist categories
-   - Usage: `python metadata_audit.py [OPTIONS] LIBRARY_PATH`
-
-Each script supports a `--dry-run` option to simulate actions without making changes, and a `--log-file` option to specify a custom log file location.
-
-### Caution
-
-These scripts modify file structures and metadata. Always back up your music library before running these scripts. Use the `--dry-run` option first to preview changes without modifying files.
+[Detailed documentation](./music_library_tools/README.md)
 
 ### File System Tools
 
-1. `ascii_tree.py`: Prints a directory tree structure in ASCII format.
-   - Usage: `python ascii_tree.py [path] [-d DEPTH] [-f]`
-   - Options:
-     - `path`: Root directory path (default: current directory)
-     - `-d DEPTH`, `--depth DEPTH`: Maximum depth of recursion
-     - `-f`, `--files`: Include files in the tree (default: directories only)
-   - Example: `python ascii_tree.py /home/user/documents -d 3 -f`
+Utilities for file system management and visualization.
+
+**Key Scripts:**
+- `ascii_tree.py`: Prints a directory tree structure in ASCII format
+
+**Usage Example:**
+```bash
+python ascii_tree.py /home/user/documents -d 3 -f
+```
 
 ### ROM Tools
 
-Located in the `rom_tools` folder, these scripts help manage ROM file collections:
+Located in the `rom_tools` folder, these scripts help manage ROM file collections.
 
-1. `nes_renamer.py`: Renames NES ROM files based on a provided DAT file.
-   - Standardizes ROM names according to common databases
-   - Handles different region formats (USA, Europe, Japan)
-   - Usage: `python nes_renamer.py <input_directory> <dat_file_path>`
+**Key Scripts:**
+- `nes_renamer.py`: Renames NES ROM files based on a provided DAT file
+- `rom_copy.py`: Manages ROM file organization and verification
 
-2. `rom_copy.py`: Manages ROM file organization and verification.
-   - Copies and organizes ROM files based on predefined rules
-   - Verifies file integrity during operations
-   - Usage: `python rom_copy.py [OPTIONS] SOURCE_DIR DEST_DIR`
+**Dependencies:**
+- No additional dependencies required
+
+[Detailed documentation](./rom_tools/README.md)
 
 ### Disc Image Tools
 
-Located in the `disc_tools` folder, these scripts handle disc image management and conversion:
+Located in the `disc_tools` folder, these scripts handle disc image management and conversion.
 
-1. `iso_extraction.py`: Extracts ISO files from 7z archives.
-   - Handles single and multi-file archives
-   - Creates organized output structure
-   - Usage: `python iso_extraction.py <folder_path>`
+**Key Scripts:**
+- `iso_extraction.py`: Extracts ISO files from 7z archives
+- `chd_creator.py`: Converts ISO files to CHD format
+- `iso_cleanup.py`: Manages ISO files after CHD conversion
+- `iso_read.py`: Analyzes ISO file headers and structure
 
-2. `iso_cleanup.py`: Manages ISO files after CHD conversion.
-   - Removes ISO files that have corresponding CHD versions
-   - Includes dry-run mode for safety
-   - Usage: `python iso_cleanup.py <folder_path> [--execute]`
+**Dependencies:**
+- `py7zr` library (for ISO extraction)
+- `chdman` utility (for CHD conversion, part of MAME tools)
 
-3. `iso_read.py`: Analyzes ISO file headers and structure.
-   - Extracts header information
-   - Displays hex dumps of critical sections
-   - Usage: `python iso_read.py <path_to_iso_file>`
-
-4. `chd_creator.py`: Converts ISO files to CHD format.
-   - Batch processes multiple files
-   - Utilizes multi-core processing
-   - Provides detailed conversion logging
-   - Usage: `python chd_creator.py <folder_path>`
-
-All disc tools support graceful interruption and provide detailed logging of operations. The CHD conversion tools require the MAME `chdman` utility to be installed and accessible in the system path.
+[Detailed documentation](./disc_tools/README.md)
 
 ## Contributing
 
