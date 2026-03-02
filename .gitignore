@@ -1,5 +1,37 @@
-.venv
+# Virtual environments
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Secrets / credentials
+.env
+
+# Data and log files
 *.json
 *.txt
-*_conversion_*.log
-*_cleanup_*.log
+*.csv
+*.log
+
+# Copyrighted / large binary content
+*.pdf
+*.epub
+
+# Generated extraction output
+out/
+extracted_chapters/
+out-*.md
+output-*.md
+output.md
+basic-computer-architecture.md
+computer-systems_warford_chapters*.md
+
+# Personal / local-only files
+manifest.yaml
+debug.sh
+video-files/
+nx-tools/
+
+# Legacy ignores (scripts removed or renamed)
+financial_parsing.py
