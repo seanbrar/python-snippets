@@ -19,7 +19,7 @@ except Exception as exc:  # pragma: no cover
     ) from exc
 
 
-VIDEO_EXTENSIONS = {
+MEDIA_EXTENSIONS = {
     ".mp4",
     ".avi",
     ".mkv",
@@ -30,12 +30,19 @@ VIDEO_EXTENSIONS = {
     ".mpeg",
     ".mpg",
     ".3gp",
+    ".m4a",
+    ".mp3",
+    ".wav",
+    ".flac",
+    ".ogg",
+    ".aac",
+    ".wma",
 }
 
 
 def find_media_files(directory: Path) -> Iterable[Path]:
     for entry in sorted(directory.iterdir()):
-        if entry.is_file() and entry.suffix.lower() in VIDEO_EXTENSIONS:
+        if entry.is_file() and entry.suffix.lower() in MEDIA_EXTENSIONS:
             yield entry
 
 
@@ -84,7 +91,7 @@ def main() -> None:
         )
 
     # Base directory of this repository
-    repo_root = Path(__file__).resolve().parent
+    repo_root = Path(__file__).resolve().parent.parent
     media_dir = repo_root / "video-files"
 
     if not media_dir.exists():

@@ -1,0 +1,4 @@
+pdfplumber
+ebooklib
+beautifulsoup4
+lxml

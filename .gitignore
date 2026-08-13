@@ -8,11 +8,14 @@ __pycache__/
 # Secrets / credentials
 .env
 
-# Data and log files
+# Data, log, and output files
 *.json
 *.txt
 *.csv
 *.log
+
+# But always track requirements files
+!**/requirements.txt
 
 # Copyrighted / large binary content
 *.pdf
@@ -24,14 +27,16 @@ extracted_chapters/
 out-*.md
 output-*.md
 output.md
-basic-computer-architecture.md
-computer-systems_warford_chapters*.md
+basic-computer-architecture*.md
+computer-systems_warford*.md
 
 # Personal / local-only files
 manifest.yaml
 debug.sh
 video-files/
-nx-tools/
 
-# Legacy ignores (scripts removed or renamed)
+# nx_tools: lives in a separate private repo (seanbrar/nx-tools)
+nx_tools/
+
+# Legacy ignores
 financial_parsing.py

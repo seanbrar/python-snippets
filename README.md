@@ -2,27 +2,52 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/downloads/)
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-A collection of Python utility scripts and tools for various tasks including text extraction, file management, transcription, and media organization.
+A collection of Python utility scripts for text extraction, media management, file system tools, and more.
 
-## Table of Contents
+## Quick Reference
 
-- [Background](#background)
-- [Install](#install)
-- [Usage](#usage)
-- [Categories](#categories)
-  - [Text Extraction](#text-extraction)
-  - [Music Library Tools](#music-library-tools)
-  - [File System Tools](#file-system-tools)
-  - [ROM Tools](#rom-tools)
-  - [Disc Image Tools](#disc-image-tools)
-  - [Standalone Utilities](#standalone-utilities)
-- [License](#license)
+Every script in the repo, searchable by what it does.
 
-## Background
+| Script | What it does | Keywords |
+|--------|-------------|----------|
+| [`pdf_extractor.py`](text_extraction/pdf_extractor.py) | Extract text from PDFs with structure, columns, and tables | pdf, text, extract, poppler, pdfplumber |
+| [`epub_extractor.py`](text_extraction/epub_extractor.py) | Extract chapters from ePub files to text/Markdown/HTML | epub, ebook, chapters, markdown |
+| [`cite_regex.py`](text_extraction/cite_regex.py) | Remove citation markers (`[1]`, `[2]`) from text | citations, regex, brackets, clean |
+| [`concat_markdown.py`](text_extraction/concat_markdown.py) | Concatenate `.md` files in a directory into one file | markdown, merge, combine |
+| [`ascii_tree.py`](filesystem_tools/ascii_tree.py) | Print a directory tree in ASCII format | tree, directory, listing, ascii |
+| [`list_directory.py`](filesystem_tools/list_directory.py) | Recursively list directory contents with depth limits | directory, list, recursive |
+| [`diagnostic_directory.py`](filesystem_tools/diagnostic_directory.py) | Inspect filenames for Unicode/encoding mismatches | unicode, encoding, filenames, curly quotes |
+| [`rename_music_files.py`](music_library_tools/rename_music_files.py) | Rename music files by disc/track number | music, rename, tracks, disc |
+| [`music_tree.py`](music_library_tools/music_tree.py) | Print a music library directory tree | music, tree, listing |
+| [`music_reorganizer.py`](music_library_tools/music_reorganizer.py) | Reorganize music files by metadata (artist/album) | music, organize, metadata, artist, album |
+| [`metadata_audit.py`](music_library_tools/metadata_audit.py) | Audit and correct music file metadata | music, metadata, audit, tags |
+| [`nes_renamer.py`](rom_tools/nes_renamer.py) | Rename NES ROMs using a No-Intro DAT file | nes, roms, rename, no-intro, dat |
+| [`rom_copy.py`](rom_tools/rom_copy.py) | Copy and organize ROM files with path mappings | roms, copy, organize, mappings |
+| [`iso_extraction.py`](disc_tools/iso_extraction.py) | Extract ISO files from 7z archives | iso, 7z, extract, disc |
+| [`chd_creator.py`](disc_tools/chd_creator.py) | Batch convert ISO to CHD format | iso, chd, convert, mame, chdman |
+| [`iso_cleanup.py`](disc_tools/iso_cleanup.py) | Remove ISOs after CHD conversion | iso, chd, cleanup, delete |
+| [`iso_read.py`](disc_tools/iso_read.py) | Analyze ISO file headers and structure | iso, headers, inspect, read |
+| [`bin_to_chd.py`](disc_tools/bin_to_chd.py) | BIN/CUE to CHD conversion pipeline | bin, cue, chd, convert |
+| [`transcript_elevenlabs.py`](misc/transcript_elevenlabs.py) | Transcribe video/audio via ElevenLabs API | transcribe, audio, video, elevenlabs, speech-to-text |
+| [`ups_value.py`](misc/ups_value.py) | Evaluate UPS fit for a given load (watts, VA, runtime) | ups, power, watts, battery, sizing |
+| [`ac_value_calcs.py`](misc/ac_value_calcs.py) | Calculate AC/SEER energy savings and ROI | ac, hvac, seer, energy, savings, roi |
+| [`base64_convert.py`](misc/base64_convert.py) | Decode base64 and parse ASN.1 for ECDSA r/s values | base64, asn1, ecdsa, cryptography |
+| [`elements_code.py`](misc/elements_code.py) | Extract metadata from Elements-style JSON exports | elements, metadata, json |
 
-This repository contains various Python scripts developed for personal use to automate common tasks. Each script is designed to be standalone and focused on a specific utility function. The scripts are organized into thematic categories, with more detailed documentation available in the subdirectory READMEs.
+## Directory Structure
+
+```
+python-snippets/
+├── text_extraction/      PDF, ePub, and Markdown processing
+├── filesystem_tools/     Directory inspection and visualization
+├── music_library_tools/  Music file organization and metadata
+├── rom_tools/            ROM file management and renaming
+├── disc_tools/           Disc image (ISO/CHD) tools
+└── misc/                 Standalone one-off utilities
+```
+
+Each subdirectory has its own README with detailed usage instructions.
 
 ## Install
 
@@ -32,91 +57,25 @@ This repository contains various Python scripts developed for personal use to au
    cd python-snippets
    ```
 
-2. Install category-specific dependencies as needed:
+2. Install dependencies for the tools you need:
    ```bash
-   # For music library tools
-   pip install -r music_library_tools/requirements.txt
-
-   # For ElevenLabs transcription
-   pip install elevenlabs python-dotenv
-
-   # For PDF extraction (optional Poppler backend)
-   pip install pdfplumber
+   pip install -r text_extraction/requirements.txt   # PDF and ePub extraction
+   pip install -r music_library_tools/requirements.txt  # Music library tools
+   pip install -r misc/requirements.txt              # ElevenLabs transcription
+   pip install py7zr                                  # Disc image extraction
    ```
 
-Most scripts require no additional dependencies beyond Python 3.x.
+   Most scripts in `filesystem_tools/`, `rom_tools/`, and several in `misc/` need only Python 3.x.
 
 ## Usage
 
-Each script can be run independently:
+Each script can be run independently from the repo root:
 
 ```bash
-python script_name.py [OPTIONS] [ARGUMENTS]
+python <category>/script_name.py [OPTIONS] [ARGUMENTS]
 ```
 
-For detailed usage instructions, refer to the category-specific sections below or the README files in each subdirectory.
-
-## Categories
-
-### Text Extraction
-
-Scripts for extracting and processing text from documents.
-
-- **`pdf-extractor.py`** — Extract text from PDFs with structural analysis, two-column detection, table handling, and optional Poppler backend.
-- **`epub_extractor.py`** — Extract chapters from ePub files to plain text, Markdown, or HTML, with optional image extraction.
-- **`cite_regex.py`** — Remove citation markers (e.g. `[1]`, `[2]`) from text via regex.
-- **`concat_markdown.py`** — Concatenate all `.md` files in a directory into a single file.
-
-### Music Library Tools
-
-Located in `music_library_tools/`. Scripts for organizing and managing a music library.
-
-- **`rename_music_files.py`** — Rename music files by extracting track numbers and applying a disc/track naming convention. Supports `--auto-clean` and `--dry-run`.
-- **`music_tree.py`** — Print a directory tree of a music library, optionally writing to file.
-- **`music_reorganizer.py`** — Reorganize music files by metadata (artist/album) with issue logging.
-- **`metadata_audit.py`** — Audit and correct music file metadata.
-
-Dependencies: see `music_library_tools/requirements.txt`.
-
-[Detailed documentation](./music_library_tools/README.md)
-
-### File System Tools
-
-Utilities for file system inspection and visualization.
-
-- **`ascii_tree.py`** — Print a directory tree in ASCII format with configurable depth.
-- **`list_directory.py`** — Recursively list directory contents with depth and item-count limits.
-- **`diagnostic_directory.py`** — Inspect filenames for Unicode encoding mismatches (curly quotes, invisible characters, etc.).
-
-### ROM Tools
-
-Located in `rom_tools/`. Scripts for managing ROM file collections.
-
-- **`nes_renamer.py`** — Rename NES ROM files using a DAT XML file.
-- **`rom_copy.py`** — Copy and organize ROM files using path mappings and ignore patterns.
-
-[Detailed documentation](./rom_tools/README.md)
-
-### Disc Image Tools
-
-Located in `disc_tools/`. Scripts for disc image management and conversion.
-
-- **`iso_extraction.py`** — Extract ISO files from 7z archives.
-- **`chd_creator.py`** — Convert ISO files to CHD format.
-- **`iso_cleanup.py`** — Remove ISO files after CHD conversion.
-- **`iso_read.py`** — Analyze ISO file headers and structure.
-- **`bin_to_chd.py`** — Orchestrate BIN/CUE to CHD conversion pipeline.
-
-Dependencies: `py7zr`, `chdman` (part of MAME tools).
-
-[Detailed documentation](./disc_tools/README.md)
-
-### Standalone Utilities
-
-- **`transcript_elevenlabs.py`** — Transcribe video/audio files using the ElevenLabs API. Requires an `ELEVENLABS_API_KEY` environment variable (or `.env` file).
-- **`ups_value.py`** — Evaluate how well a UPS matches a given load (watts, VA, runtime).
-- **`base64_convert.py`** — Decode base64 and parse ASN.1 to extract r/s integers (e.g. for ECDSA signatures).
-- **`elements-code.py`** — Extract metadata from Elements-style JSON exports.
+See the README in each subdirectory for detailed usage.
 
 ## License
 

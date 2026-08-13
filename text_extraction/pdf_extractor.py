@@ -6,16 +6,16 @@ Extracts text from PDF files with structure preservation, semantic analysis
 (headings, lists, code blocks), two-column layout detection, table extraction,
 and optional Poppler backend support.
 
-Use the project venv from the repo root:  .venv/bin/python pdf-extractor.py ...
+Use the project venv from the repo root:  .venv/bin/python text_extraction/pdf_extractor.py ...
 Or activate first:  source .venv/bin/activate
 
 Usage:
-    .venv/bin/python pdf-extractor.py document.pdf --semantic --dedup
-    python pdf-extractor.py document.pdf --semantic --start 5 --end 20 -o out.md
-    python pdf-extractor.py document.pdf --use-poppler --dedup
-    python pdf-extractor.py document.pdf --extract-tables --tables-dir tables/
+    python text_extraction/pdf_extractor.py document.pdf --semantic --dedup
+    python text_extraction/pdf_extractor.py document.pdf --semantic --start 5 --end 20 -o out.md
+    python text_extraction/pdf_extractor.py document.pdf --use-poppler --dedup
+    python text_extraction/pdf_extractor.py document.pdf --extract-tables --tables-dir tables/
 
-Run ``python pdf-extractor.py --tips`` for more examples.
+Run ``python text_extraction/pdf_extractor.py --tips`` for more examples.
 """
 
 import os
@@ -23,7 +23,8 @@ import sys
 
 if __name__ == "__main__":
     _script_dir = os.path.dirname(os.path.abspath(__file__))
-    _venv_python = os.path.join(_script_dir, ".venv", "bin", "python")
+    _repo_root = os.path.dirname(_script_dir)
+    _venv_python = os.path.join(_repo_root, ".venv", "bin", "python")
     if os.path.exists(_venv_python) and os.path.realpath(
         sys.executable
     ) != os.path.realpath(_venv_python):

@@ -5,14 +5,14 @@ Epub Chapter Extractor
 Extracts specific chapters from an ePub file, with output as plain text,
 Markdown, or HTML.  Supports image extraction and combined multi-chapter output.
 
-Use the project venv from the repo root:  .venv/bin/python epub_extractor.py ...
+Use the project venv from the repo root:  .venv/bin/python text_extraction/epub_extractor.py ...
 Or activate first:  source .venv/bin/activate
 
 Usage:
-    .venv/bin/python epub_extractor.py book.epub --chapters 1 2 3
-    python epub_extractor.py book.epub --chapters 7 8 --output-format markdown
-    python epub_extractor.py book.epub --chapters 1 2 3 --combined-markdown out.md
-    python epub_extractor.py book.epub --chapters 5 --save-images --image-naming by-figure
+    python text_extraction/epub_extractor.py book.epub --chapters 1 2 3
+    python text_extraction/epub_extractor.py book.epub --chapters 7 8 --output-format markdown
+    python text_extraction/epub_extractor.py book.epub --chapters 1 2 3 --combined-markdown out.md
+    python text_extraction/epub_extractor.py book.epub --chapters 5 --save-images --image-naming by-figure
 """
 
 import os
@@ -20,7 +20,8 @@ import sys
 
 if __name__ == "__main__":
     _script_dir = os.path.dirname(os.path.abspath(__file__))
-    _venv_python = os.path.join(_script_dir, ".venv", "bin", "python")
+    _repo_root = os.path.dirname(_script_dir)
+    _venv_python = os.path.join(_repo_root, ".venv", "bin", "python")
     if os.path.exists(_venv_python) and os.path.realpath(
         sys.executable
     ) != os.path.realpath(_venv_python):
